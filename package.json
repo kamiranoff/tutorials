@@ -1,0 +1,27 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "express tuto",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.12.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kamiranoff/express.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "kevin amiranoff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamiranoff/express/issues"
+  },
+  "homepage": "https://github.com/kamiranoff/express"
+}
