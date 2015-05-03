@@ -2,7 +2,7 @@
  *
  * Server.js
  * Watching getting started with Express
- * 0204 - Router Objects
+ * 0301 - Request objects
  **/
 
 /*===============================
@@ -10,10 +10,13 @@
 ===============================*/
 
 /*==========  Application settings  ==========*/
-
+// ./ points to the root folder
+//
 var express = require('express'),
     bodyParser = require('body-parser'), //middleware - parse the body
-    app = express();
+    app = express(),
+    APIv1 = require('./server/api/apiv1.js'), //require router 1
+    APIv2 = require('./server/api/apiv2.js'); //require router 2
 
 
 /*==========  Variables  ==========*/
@@ -138,6 +141,47 @@ app.get('/user_info', function(req, res) {
 
 
 
+/*=====================================
+=            ROUTER OBJECT            =
+=====================================*/
+//Router object all to use all these method in contain environment
+// - use
+// - param
+// - verb / all
+// - route
+
+var router = express.Router({
+  caseSensitive: false, //default option
+  strict: true  //default option
+});
+
+router.use(function(req,res,next){
+  console.log('router specific middleware. Will log in all routers');
+  next();
+});
+
+router.get('/',function(req,res){
+  res.send('router home route');
+});
+
+//Set the specific route for the router
+app.use('/api',router);
+
+//Register custom routers from folder ./api/;
+app.use('/api/v1',APIv1);
+app.use('/api/v2',APIv2);
+
+/*-----  End of ROUTER OBJECT  ------*/
+
+
+/*=======================================
+=            REQUEST OBJECTS            =
+=======================================*/
+
+
+
+/*-----  End of REQUEST OBJECTS  ------*/
+
 
 
 
@@ -185,22 +229,25 @@ app.route('/')
 =            GET - READ            =
 ==================================*/
 
+/*==========  simple route  ==========*/
 
-//With Multiples callbacks inline
+app.get('/route', function(req, res) {
+    res.send('this is a route');
+});
+
+/*==========  route with multiples callbacks inline  ==========*/
+
 app.get('/', log, function(req, res) {
     res.render('index', { //render jade files
         names: names //Passing object of names
     });
 });
 
-app.get('/route', function(req, res) {
-    res.send('this is a route');
-});
 
-
-
+/*==========  route with parameters  ==========*/
 //app.param has to be above the route that uses the parameters
 //we passes the object as a parameter
+
 app.param('name', function(req, res, next, name) {
     //modifies the request object
     req.name = name[0].toUpperCase() + name.substring(1); //set the first character to uppercase
@@ -212,6 +259,7 @@ app.param('name', function(req, res, next, name) {
     //   next();
     // });
 });
+
 //route with route parameter
 app.get('/name/:name', function(req, res) {
     //without the middleware defined above
@@ -219,6 +267,17 @@ app.get('/name/:name', function(req, res) {
     res.send('Your name is ' + req.name);
 
 });
+
+
+/*==========  Request objects  ==========*/
+app.get('/animals/:animal',function(req,res){
+  console.log(req.params.animal);//get token with : in the route
+  console.log(req.query.name);
+  //
+  res.send(req.params.animal);
+});
+
+
 /*-----  End of GET - READ  ------*/
 
 
