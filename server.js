@@ -1,8 +1,8 @@
 /**
  *
  * Server.js
- * Watching getting started with Express
- * 0301 - Request objects
+ * Watching: TutsPlus Getting Started with Express
+ * finished tuto
  **/
 
 /*===============================
@@ -22,7 +22,10 @@ var express = require('express'),
 /*==========  Variables  ==========*/
 
 var names = [];
-
+var user = {
+    'name': 'kevin',
+    'role': 'admin'
+};
 /*-----  End of Variables  ------*/
 
 
@@ -123,16 +126,18 @@ app.use(express.static('./public'));
 =            JSON EXAMPLE            =
 ====================================*/
 
-//use of json replace example
-app.set('json replacer', function(attr, val) {
-    if (attr === 'passwordHash') {
-        return undefined;
-    }
-    return val.toUpperCase();
+// //use of json replace example
+// app.set('json replacer', function(attr, val) {
+//     if (attr === 'passwordHash') {
+//         return undefined;
+//     }
 
-});
+//     return val.toUpperCase();
+
+// });
 app.get('/user_info', function(req, res) {
     //get user data
+
     res.json(user); // .json uses JSON.stringify
 });
 
@@ -151,25 +156,25 @@ app.get('/user_info', function(req, res) {
 // - route
 
 var router = express.Router({
-  caseSensitive: false, //default option
-  strict: true  //default option
+    caseSensitive: false, //default option
+    strict: true //default option
 });
 
-router.use(function(req,res,next){
-  console.log('router specific middleware. Will log in all routers');
-  next();
+router.use(function(req, res, next) {
+    console.log('router specific middleware. Will log in all routers');
+    next();
 });
 
-router.get('/',function(req,res){
-  res.send('router home route');
+router.get('/', function(req, res) {
+    res.send('router home route');
 });
 
 //Set the specific route for the router
-app.use('/api',router);
+app.use('/api', router);
 
 //Register custom routers from folder ./api/;
-app.use('/api/v1',APIv1);
-app.use('/api/v2',APIv2);
+app.use('/api/v1', APIv1);
+app.use('/api/v2', APIv2);
 
 /*-----  End of ROUTER OBJECT  ------*/
 
@@ -177,10 +182,83 @@ app.use('/api/v2',APIv2);
 /*=======================================
 =            REQUEST OBJECTS            =
 =======================================*/
+/**
+ * url: '/:ATTR?ATTR=Kevin '   //exemple url
+ * req.params.ATTR;            //get token with : in the url
+ * req.query.ATTR;             //get query string in the url
+ * req.body.ATTR               //require a body parser middleware
+ * req.param('ATTR')           // check all the above in this order : params,body,query
+ *
+ * req.route;                  //
+ * req.originalUrl             //
+ * req.cookies.ATTR            //
+ * req.get();                  //any header name
+ * req.accepts('');            //return a boolean ex: application/JSON;
+ *
+ **/
 
+app.get('/animals/:animal', function(req, res) {
+    console.log(req.params.animal); //get token with : in the url
+    console.log(req.query.name); //get the query string in the url ex ?name=kevin
+    res.send(req.params.animal);
+});
 
 
 /*-----  End of REQUEST OBJECTS  ------*/
+
+
+
+
+
+
+/*=======================================
+=            RESPONSE OBJECT            =
+=======================================*/
+
+app.get('/response-object', function(req, res, next) {
+    res.status(200);
+    res.set(header, value);
+    res.get(header);
+    res.status(404).json({
+        error: 'message'
+    });
+    res.redirect(301, '/');
+
+    // res.cookie(name, value);
+    // res.clearCookie(name)
+
+    // res.send(status, text);
+    // res.json(status, object);
+    // res.jsonp(status, object). //callback({});
+    // res.download(file);
+
+    // res.render(file,props,function(err,html){
+    //   res.send(200,html);
+    // });
+
+
+
+    next();
+});
+
+/*==========  Formatting Requests  ==========*/
+
+app.get('/format',function(req,res){
+  names = ['Wolverine','Psylocke'];
+  res.format({
+    'text/plain':function(){
+      res.send('text response');
+    },
+    'text/html':function(){
+      res.render('index.jade',{names:names});
+    },
+    'application/json':function(){
+      res.json({topic:'Express'});
+    }
+  });
+});
+
+/*-----  End of RESPONSE OBJECT  ------*/
 
 
 
@@ -196,34 +274,6 @@ app.all('/', function(req, res, next) {
 });
 
 /*-----  End of ALL - CRUD  ------*/
-
-
-/*=================================
-=            app.route            =
-=================================*/
-
-//chain methods to reduce repetition with app.route
-/*
-app.route('/')
-  .all(function(req, res, next) {
-      console.log('from all method');
-      next();
-  })
-  .get(log, function(req, res) {
-      res.render('index', { //render jade files
-          names: names //Passing object of names
-      });
-  })
-  .post(function(req, res) {
-      names.push(req.body.name); //Push name into names
-      res.redirect('/'); //does a get request once the post is done
-  });
-*/
-
-
-/*-----  End of app.route  ------*/
-
-
 
 /*==================================
 =            GET - READ            =
@@ -269,19 +319,6 @@ app.get('/name/:name', function(req, res) {
 });
 
 
-/*==========  Request objects  ==========*/
-app.get('/animals/:animal',function(req,res){
-  console.log(req.params.animal);//get token with : in the route
-  console.log(req.query.name);
-  //
-  res.send(req.params.animal);
-});
-
-
-/*-----  End of GET - READ  ------*/
-
-
-
 /*=====================================
 =            POST - CREATE            =
 =====================================*/
@@ -313,7 +350,30 @@ app.post('/', function(req, res) {
 
 /*-----  End of DELETE - DELETE  ------*/
 
+/*=================================
+=            app.route            =
+=================================*/
 
+//chain methods to reduce repetition with app.route
+/*
+app.route('/')
+  .all(function(req, res, next) {
+      console.log('from all method');
+      next();
+  })
+  .get(log, function(req, res) {
+      res.render('index', { //render jade files
+          names: names //Passing object of names
+      });
+  })
+  .post(function(req, res) {
+      names.push(req.body.name); //Push name into names
+      res.redirect('/'); //does a get request once the post is done
+  });
+*/
+
+
+/*-----  End of app.route  ------*/
 
 
 
