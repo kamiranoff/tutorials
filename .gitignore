@@ -1,2 +1,10 @@
 node_modules
 bower_components/
+public
+.tmp
+.sass-cache
+.idea
+client/bower_components
+dist
+/server/config/local.env.js
+sources/

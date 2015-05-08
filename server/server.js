@@ -17,8 +17,8 @@ var express = require('express'),
 
 /*==========  Environment  ==========*/
 var environment = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-  env = require('./server/config/env')[environment];
-
+  env = require('./config/env')[environment];
+  console.log(env);
 
 /*==========  middlewares  ==========*/
 
@@ -26,13 +26,13 @@ var environment = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
 
 /*==========  Custom middlewares  ==========*/
 
-require('./server/config/customMiddlewares')(app);
+require('./config/customMiddlewares')(app);
 
 /*-----  End of Custom middlewares  ------*/
 
 /*==========  configuration  ==========*/
 
-require('./server/config/config')(app, env);
+require('./config/config')(app, env);
 
 /*-----  End of configuration  ------*/
 
@@ -46,7 +46,7 @@ require('./server/config/config')(app, env);
 =            ROUTERS            =
 ===============================*/
 
-require('./server/config/routers')(app);
+require('./config/routers')(app);
 
 /*-----  End of ROUTERS  ------*/
 
@@ -56,8 +56,8 @@ require('./server/config/routers')(app);
 =            ROUTES            =
 ==============================*/
 
-require('./server/routes/routes')(app);
-require('./server/routes/errors')(app);
+require('./routes/routes')(app);
+require('./routes/errors')(app);
 /*-----  End of ROUTES  ------*/
 
 

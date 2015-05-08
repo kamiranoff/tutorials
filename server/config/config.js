@@ -3,14 +3,17 @@
 =====================================*/
 
 var express = require('express'),
+  favicon = require('serve-favicon'),
   path = require('path'),
   bodyParser = require('body-parser'),
-  morgan = require('morgan');
+  morgan = require('morgan'),
+  errorHandler = require('errorhandler');
 
 
 
 
 module.exports = function(app, configEnv) {
+  var env = app.settings.env;
   /**
    * app.set();        //app.set(name, value)
    * app.get();        //Returns the value of name app setting, where name is one of strings in the app settings table
@@ -38,7 +41,7 @@ module.exports = function(app, configEnv) {
   app.set('view engine', 'jade'); //set the view engine
 
   // replace the default view folder by the folder defined as the second argument
-  app.set('views', configEnv.rootPath + '/views');
+  app.set('views', configEnv.rootPath + '/server/views');
 
   //bodyParser Middleware
   app.use(bodyParser.urlencoded({
@@ -66,9 +69,29 @@ module.exports = function(app, configEnv) {
 
   // disable them in production
   // use $ NODE_ENV=production node examples/error-pages
-  if ('development' == app.settings.env){
+  if ('development' == env) {
     app.enable('verbose errors');
   }
-};
 
+  if ('production' === env) {
+    app.use(favicon(path.join(configEnv.rootPath, 'public', 'favicon.ico')));
+    app.use(express.static(path.join(configEnv.rootPath, 'public')));
+    app.set('appPath', configEnv.rootPath + '/public');
+    app.use(morgan('dev'));
+  }
+
+  if ('development' === env || 'test' === env) {
+    app.use(require('connect-livereload')());
+    app.use(express.static(path.join(configEnv.rootPath, '.tmp')));
+    app.use(express.static(path.join(configEnv.rootPath, 'client')));
+    app.set('appPath', 'client');
+    app.use(morgan('dev'));
+    app.use(errorHandler()); // Error handler - has to be last
+  }
+
+
+
+
+
+};
 /*-----  End of CONFIGURATION  ------*/
