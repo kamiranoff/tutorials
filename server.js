@@ -1,4 +1,3 @@
-/*jslint node: true */
 /**
  *
  * Server.js
@@ -9,7 +8,6 @@
 /*===============================
 =            GLOBALS            =
 ===============================*/
-'use strict';
 /*==========  Application settings  ==========*/
 // ./ points to the root folder
 
@@ -23,6 +21,7 @@ var environment = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
 
 
 /*==========  middlewares  ==========*/
+
 /*-----  End of middlewares  ------*/
 
 /*==========  Custom middlewares  ==========*/
@@ -53,7 +52,6 @@ require('./server/config/routers')(app);
 
 
 
-
 /*==============================
 =            ROUTES            =
 ==============================*/
@@ -61,9 +59,6 @@ require('./server/config/routers')(app);
 require('./server/routes/routes')(app);
 require('./server/routes/errors')(app);
 /*-----  End of ROUTES  ------*/
-
-
-
 
 
 
