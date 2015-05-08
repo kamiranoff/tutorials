@@ -12,6 +12,8 @@ head
   // build:css(client) app/vendor.css
   // bower:css
   link(rel='stylesheet', href='bower_components/animate.css/animate.css', type='stylesheet/css')
+  link(rel='stylesheet', href='bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.css', type='stylesheet/css')
+  link(rel='stylesheet', href='bower_components/fontawesome/css/font-awesome.css', type='stylesheet/css')
   // endbower
   // endbuild
   // build:css({.tmp,client}) app/app.css
@@ -29,6 +31,7 @@ body
   // Add your site or application content here
   div
     h1 Hello Baby
+      span.fa.fa-smile-o
     h2.welcome-message
     a(href="first-page.html") first-page
   // build:js({client,node_modules}) app/vendor.js
