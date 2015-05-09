@@ -1,25 +1,6 @@
 doctype html
-head
-  meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-  meta(http-equiv='X-UA-Compatible', content='IE=edge')
-  base(href='/')
-  title
-    | Site
-  meta(name='description', content='')
-
-  meta(name='viewport', content='width=device-width')
-  // Place favicon.ico and apple-touch-icon.png in the root directory
-  // build:css(client) app/vendor.css
-  // bower:css
-  link(rel='stylesheet', href='bower_components/animate.css/animate.css', type='stylesheet/css')
-  link(rel='stylesheet', href='bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.css', type='stylesheet/css')
-  link(rel='stylesheet', href='bower_components/fontawesome/css/font-awesome.css', type='stylesheet/css')
-  // endbower
-  // endbuild
-  // build:css({.tmp,client}) app/app.css
-  link(rel='stylesheet', href='app/app.css', type='stylesheet/css')
-  // endbuild
-
+html
+  include ./views/includes/head.jade
 body
   //if lt IE 7
     p.browsehappy
@@ -30,7 +11,7 @@ body
       |  to improve your experience.
   // Add your site or application content here
   div
-    h1 Hello Baby
+    h1 Hello Baby ! :?
       span.fa.fa-smile-o
     h2.welcome-message
     a(href="first-page.html") first-page
@@ -40,5 +21,7 @@ body
   // endbower
   // endbuild
   // build:js({.tmp,client}) app/app.js
-  script(src='app/app.js')
+  script(src='scripts/app.js')
   // endbuild
+  include ./views/includes/footer.jade
+

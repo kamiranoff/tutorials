@@ -11,11 +11,11 @@ head
   // Place favicon.ico and apple-touch-icon.png in the root directory
   // build:css(client) app/vendor.css
   // bower:css
-  link(rel='stylesheet', href='bower_components/animate.css/animate.css', type='stylesheet/css')
+  link(rel='stylesheet', href='../bower_components/animate.css/animate.css', type='stylesheet/css')
   // endbower
   // endbuild
-  // build:css({.tmp,client}) app/app.css
-  link(rel='stylesheet', href='app/app.css', type='stylesheet/css')
+  // build:css({.tmp,client}) styles/app.css
+  link(rel='stylesheet', href='styles/app.css', type='stylesheet/css')
   // endbuild
 
 body
@@ -33,7 +33,7 @@ body
     a(href="index.html") Index
   // build:js({client,node_modules}) app/vendor.js
   // bower:js
-  script(src='bower_components/jquery/dist/jquery.js')
+  script(src='../bower_components/jquery/dist/jquery.js')
   // endbower
   // endbuild
   // build:js({.tmp,client}) app/app.js

@@ -84,6 +84,8 @@ module.exports = function(app, configEnv) {
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(configEnv.rootPath, '.tmp')));
     app.use(express.static(path.join(configEnv.rootPath, 'client')));
+    console.log('Root: ' + configEnv.rootPath);
+    app.use('/bower_components',  express.static(path.join(configEnv.rootPath, '/bower_components')));
     app.set('appPath', 'client');
     app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last

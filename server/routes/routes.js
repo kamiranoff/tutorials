@@ -50,7 +50,7 @@ module.exports = function(app) {
   /*==========  Formatting Requests  ==========*/
 
   app.get('/format', function(req, res) {
-    names = ['Wolverine', 'Psylocke'];
+    names = ['Wolverine', 'Psylocke','Jean Grey'];
     res.format({
       'text/plain': function() {
         res.send('text response');
