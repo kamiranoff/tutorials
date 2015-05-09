@@ -71,10 +71,7 @@ module.exports = function (grunt) {
       },
       jade: {
         files: [
-          '<%= app.client %>/index.jade',
-          '<%= app.client %>/{app,components}/*',
-          '<%= app.client %>/{app,components}/*',
-          '<%= app.client %>/{app,components}/**/*.jade'],
+          '<%= app.client %>/**/*.jade'],
         tasks: ['jade']
       },
       gruntfile: {
