@@ -3,6 +3,8 @@
 ==============================*/
 
 module.exports = function(app) {
+  var path = require('path');
+  var client = global.appRoot = path.resolve(__dirname+ '/../../client/');
 
 
   /*==========  Variables  ==========*/
@@ -76,7 +78,10 @@ module.exports = function(app) {
 
   // run any of crud method if the route matchesa
   app.all('/', function(req, res, next) {
-    console.log('from all method');
+    console.log('Route.js: from all method');
+    console.log('Route: ' + __dirname);
+    console.log('Route: ' + client);
+    console.log('Route: '+  global.appRoot);
     next();
   });
 
@@ -95,11 +100,15 @@ module.exports = function(app) {
   /*==========  route with multiples callbacks inline  ==========*/
 
   app.get('/', log, function(req, res) {
-    res.render('index', { //render jade files
+
+    res.render(client+'/views/index', { //render jade files
       names: names //Passing object of names
     });
   });
 
+  app.get('/index.html', log, function(req, res) {
+    res.redirect('/'); //does a get request once the post is done
+  });
 
   /*==========  route with parameters  ==========*/
   //app.param has to be above the route that uses the parameters

@@ -1,6 +1,6 @@
 doctype html
 html
-  include ./views/includes/head.jade
+  include ./includes/head.jade
 body
   //if lt IE 7
     p.browsehappy
@@ -10,8 +10,8 @@ body
       a(href='http://browsehappy.com/') upgrade your browser
       |  to improve your experience.
   // Add your site or application content here
-  div
-    h1 Hello Baby ! :?
+  divs
+    h1 Hello Baby, How are you today ?
       span.fa.fa-smile-o
     h2.welcome-message
     a(href="first-page.html") first-page
@@ -23,5 +23,5 @@ body
   // build:js({.tmp,client}) app/app.js
   script(src='scripts/app.js')
   // endbuild
-  include ./views/includes/footer.jade
+  include ./includes/footer.jade
 

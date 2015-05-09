@@ -59,7 +59,7 @@ module.exports = function(app, configEnv) {
   //serve files to the server from the specified directory
   //
   //optional first parameters.
-  app.use('/assets', express.static(path.join(configEnv.rootPath, 'public')));
+  app.use('/assets', express.static(path.join(configEnv.rootPath, 'client')));
   /*-----  End of Registering build-in middleware  ------*/
 
   // our custom "verbose errors" setting
@@ -84,11 +84,14 @@ module.exports = function(app, configEnv) {
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(configEnv.rootPath, '.tmp')));
     app.use(express.static(path.join(configEnv.rootPath, 'client')));
-    console.log('Root: ' + configEnv.rootPath);
-    app.use('/bower_components',  express.static(path.join(configEnv.rootPath, '/bower_components')));
+    console.log('config.js - Root: ' + configEnv.rootPath);
+    app.use('/bower_components', express.static(path.join(configEnv.rootPath, '/bower_components')));
     app.set('appPath', 'client');
     app.use(morgan('dev'));
-    app.use(errorHandler()); // Error handler - has to be last
+    app.use(errorHandler({
+      dumpExceptions: true,
+      showStack: true
+    })); // Error handler - has to be last
   }
 
 
