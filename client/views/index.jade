@@ -4,24 +4,14 @@ html
 body
   //if lt IE 7
     p.browsehappy
-      | You are using an
-      strong outdated
-      |  browser. Please
-      a(href='http://browsehappy.com/') upgrade your browser
-      |  to improve your experience.
+    | You are using an
+    strong outdated
+    |  browser. Please
+    a(href='http://browsehappy.com/') upgrade your browser
+    |  to improve your experience.
   // Add your site or application content here
-  divs
-    h1 Hello Baby, How are you today ?
-      span.fa.fa-smile-o
-    h2.welcome-message
-    a(href="first-page.html") first-page
-  // build:js({client,node_modules}) app/vendor.js
-  // bower:js
-  script(src='bower_components/jquery/dist/jquery.js')
-  // endbower
-  // endbuild
-  // build:js({.tmp,client}) app/app.js
-  script(src='scripts/app.js')
-  // endbuild
+  include ./includes/header.jade
+  include ./includes/content.jade
+  include ./includes/scripts.jade
   include ./includes/footer.jade
 
