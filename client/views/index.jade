@@ -11,7 +11,9 @@ body
     |  to improve your experience.
   // Add your site or application content here
   include ./includes/header.jade
-  include ./includes/content.jade
-  include ./includes/scripts.jade
+  block content
+    include ./includes/content.jade
+  block scripts
+    include ./includes/scripts.jade
   include ./includes/footer.jade
 

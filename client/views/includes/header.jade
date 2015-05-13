@@ -1,21 +1,43 @@
-header
-  nav.navbar.navbar-default.navbar-fixed-top
+// Fixed navbar
+.navbar.navbar-default.navbar-fixed-top(role='navigation')
+  .container
     .navbar-header
-      button(type="button",data-toggle="collapse",data-target="#links-of-navbar").navbar-toggle.collapsed
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+        span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
-    navbar.collapse.navbar-collapse(id="links-of-navbar")
+      a.navbar-brand(href='#') Project name
+    .navbar-collapse.collapse
       ul.nav.navbar-nav
         li.active
-          a.home(href='/')
-            | Home
+          a(href='#') Home
         li
-          a(href="/")
-            | 2nd Link
+          a(href='maze.html') Maze
         li
-          a(href="/")
-            | 3nd Link
+          a(href='#contact') Contact
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | Dropdown
+            span.caret
+          ul.dropdown-menu(role='menu')
+            li
+              a(href='#') Action
+            li
+              a(href='#') Another action
+            li
+              a(href='#') Something else here
+            li.divider
+            li.dropdown-header Nav header
+            li
+              a(href='#') Separated link
+            li
+              a(href='#') One more separated link
+      ul.nav.navbar-nav.navbar-right
         li
-          a(href="/")
-            | 4nd Link
+          a(href='../navbar/') Default
+        li
+          a(href='../navbar-static-top/') Static top
+        li.active
+          a(href='./') Fixed top
+    // /.nav-collapse

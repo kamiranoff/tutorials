@@ -110,6 +110,10 @@ module.exports = function(app) {
     res.redirect('/'); //does a get request once the post is done
   });
 
+  app.get('/maze.html',function(req,res){
+    res.render(client+'/views/maze');
+  });
+
   /*==========  route with parameters  ==========*/
   //app.param has to be above the route that uses the parameters
   //we passes the object as a parameter
@@ -148,4 +152,7 @@ module.exports = function(app) {
   /*-----  End of POST - CREATE  ------*/
 
 };
+
+
+
 /*-----  End of ROUTES  ------*/
