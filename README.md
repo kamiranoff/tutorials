@@ -1,5 +1,5 @@
 
 #Starter for tutorials
 <p>Here I should put all the things I am trying to learn.</p>
-<p>Master with Grunt</p>
-<p>Branch Wgulp with Gulp</p>
+<p>Master with Gulp</p>
+<p>Branch WithGrunt with Grunt</p>
