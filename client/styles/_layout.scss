@@ -6,13 +6,29 @@
 }
 
 body {
-  background-color: #abc;
-  padding: 110px;
+  background-color: $siteBackground;
+  padding: 50px 15px;
 }
 
 h1 {
+  margin:50px 0 30px 0;
   span {
     margin-left: 30px;
-    color: #222;
+    color: $mainText;
   }
+}
+h2{
+  margin:40px 0 25px 0;
+}
+
+a{
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+ul,li{
+  margin: 0;
+  text-indent: none;
+  padding:0;
 }

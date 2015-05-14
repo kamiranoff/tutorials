@@ -8,9 +8,35 @@
   padding: 0.2em 0; }
 
 body {
-  background-color: #abc;
-  padding: 110px; }
+  background-color: #bcd;
+  padding: 50px 15px; }
 
-h1 span {
-  margin-left: 30px;
-  color: #222; }
+h1 {
+  margin: 50px 0 30px 0; }
+  h1 span {
+    margin-left: 30px;
+    color: #222; }
+
+h2 {
+  margin: 40px 0 25px 0; }
+
+a:hover {
+  text-decoration: none; }
+
+ul, li {
+  margin: 0;
+  text-indent: none;
+  padding: 0; }
+
+.main-page-list {
+  list-style: none; }
+  .main-page-list .main-page-links {
+    transition: 0.3s all ease;
+    padding: 30px 15px;
+    display: block;
+    border: 1px solid #ccc;
+    background-color: #efefef;
+    margin: 10px 0;
+    font-size: 20px; }
+    .main-page-list .main-page-links:hover {
+      background-color: #fefefe; }
