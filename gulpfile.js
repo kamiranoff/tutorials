@@ -10,6 +10,7 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var nodemon = require('gulp-nodemon');
 var livereload = require('gulp-livereload');
+var browserSync = require('browser-sync');
 
 
 /*============================
@@ -17,19 +18,19 @@ var livereload = require('gulp-livereload');
 ============================*/
 
 gulp.task('templates', function() {
-  var YOUR_LOCALS = {};
 
   gulp.src('client/views/**/*.jade')
     .pipe(jade({
-      locals: YOUR_LOCALS
+      pretty: true
     }))
-    .pipe(gulp.dest('client/html/'))
+    .pipe(gulp.dest('dist/html/'))
+    .pipe(livereload());
 });
 
 
-gulp.task('jade:reload',function(){
-  gulp.src('client/views/**/*.jade').pipe(livereload());
-  });
+// gulp.task('jade:reload', function() {
+//   gulp.src('client/views/**/*.jade').pipe(livereload());
+// });
 
 /*-----  End of JADE  ------*/
 
@@ -39,19 +40,47 @@ gulp.task('jade:reload',function(){
 =            SERVER            =
 ==============================*/
 
-gulp.task('serve', function() {
-  nodemon({
+gulp.task('serve', function(cb) {
+  // We use this `called` variable to make sure the callback is only executed once
+  var called = false;
+  return nodemon({
     script: 'server/server.js',
-    ext: 'js html jade',
-    ignore: ['bower_components', 'node_modules', 'sources','client/scripts'],
-    env: {
-      'NODE_ENV': 'development'
+    watch: ['server/**/*.*','client/views/**/*.*']
+  })
+  .on('start', function onStart() {
+    if (!called) {
+      cb();
     }
-  }).on('start', function () {
-        setTimeout(function () {
-            livereload.changed('client/views/**/*.jade');
-        }, 500); // wait for the server to finish loading before restarting the browsers
-    });
+    called = true;
+  })
+  .on('restart', function onRestart() {
+
+    // Also reload the browsers after a slight delay
+    setTimeout(function reload() {
+      browserSync.reload({
+        stream: false
+      });
+    }, 500);
+  });
+});
+
+// Make sure `nodemon` is started before running `browser-sync`.
+gulp.task('browser-sync', ['serve'], function() {
+  var port = process.env.PORT || 3030;
+  browserSync.init({
+
+    // All of the following files will be watched
+    files: ['client/**/*.*'],
+
+    // Tells BrowserSync on where the express app is running
+    proxy: 'http://localhost:' + port,
+
+    // This port should be different from the express app port
+    port: 4000,
+
+    // Which browser should we launch?
+    browser: ['google chrome']
+  });
 });
 
 /*-----  End of SERVER  ------*/
@@ -116,10 +145,10 @@ gulp.task('sass', function() {
 gulp.task('scripts', function() {
   return gulp.src('client/scripts/**/*.js')
     .pipe(concat('all.js'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist/scripts'))
     .pipe(rename('all.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist/scriptsc'));
 
 });
 
@@ -137,16 +166,10 @@ gulp.task('watch', function() {
   gulp.watch('client/**/*.js', ['lintFront', 'scripts']);
   gulp.watch('server/**/*.js', ['lintBack', 'scripts']);
   gulp.watch('client/styles/**/*.scss', ['sass']);
-  gulp.watch('client/views/**/*.jade',['jade:reload']);
   livereload.listen();
 });
 
 // Default Task
-gulp.task('default', ['serve', 'lintFront', 'lintBack', 'sass', 'watch']);
+gulp.task('default', ['browser-sync', 'lintFront', 'lintBack', 'watch']);
 
 /*-----  End of GULP TASKS  ------*/
-
-
-
-
-

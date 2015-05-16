@@ -65,7 +65,7 @@ var MODULE = (function ($) {
     // ...
   }
 
-  $('.welcome-message').html('You are online, Enjoy.');
+  $('.welcome-message').html('You are , Enjoy.');
 
   my.moduleProperty = 1;
   my.moduleMethod = function () {

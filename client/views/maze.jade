@@ -1,8 +1,8 @@
 extends index.jade
 
 block content
-  h1 This is the maze page
-
+  h1 This is the maze page.
+  h2 Would you help the robot find his way out ?
 block append scripts
   script(src='scripts/maze/robot.js')
   script(src='scripts/maze/maze.js')
@@ -12,4 +12,5 @@ block append scripts
     m.setStart(1, 1, "north");
     m.setEnd(7, 1);
     m.setWall(1, 1, "east");
+
 
