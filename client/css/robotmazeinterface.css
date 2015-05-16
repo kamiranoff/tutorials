@@ -1,107 +1,60 @@
-/**
- * App-wide Styles
- */
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0; }
-
-body {
-  background-color: #abc;
-  padding: 50px 0px; }
-
-.main {
-  margin: 30px; }
-
-h1 {
-  margin: 50px 0 30px 0; }
-  h1 span {
-    margin-left: 30px;
-    color: #222; }
-
-h2 {
-  margin: 40px 0 25px 0; }
-
-a:hover {
-  text-decoration: none; }
-
-ul, li {
-  margin: 0;
-  text-indent: none;
-  padding: 0; }
-
-footer {
-  border-top: 1px solid #fefefe;
-  margin-top: 20px; }
-
-.main-page-list {
-  list-style: none; }
-  .main-page-list .main-page-links {
-    transition: 0.3s all ease;
-    padding: 30px 15px;
-    display: block;
-    border: 1px solid #ccc;
-    background-color: #efefef;
-    margin: 10px 0;
-    font-size: 20px; }
-    .main-page-list .main-page-links:hover {
-      background-color: #fefefe; }
-
 .maze {
-  border: 5px solid #123;
-  display: inline-block;
-  vertical-align: top; }
-
+    border: 5px solid #292929;
+    display: inline-block;
+    vertical-align: top;
+}
 .maze .mazeRow .mazeSpace {
-  display: inline-block;
-  border: 2px solid #fefefe;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  line-height: 20px;
-  font-size: 20px;
-  text-align: center;
-  position: relative; }
-
+    display: inline-block;
+    border: 5px solid #F8F8F8;
+    width: 2em;
+    height: 2em;
+    overflow: hidden;
+    line-height: 2em;
+    font-size: 2em;
+    text-align: center;
+    position: relative;
+}
 .maze .mazeRow .mazeSpace.north {
-  border-top-color: #123; }
-
+    border-top-color: #292929;
+}
 .maze .mazeRow .mazeSpace.east {
-  border-right-color: #123; }
-
+    border-right-color: #292929;
+}
 .maze .mazeRow .mazeSpace.south {
-  border-bottom-color: #123; }
-
+    border-bottom-color: #292929;
+}
 .maze .mazeRow .mazeSpace.west {
-  border-left-color: #123; }
-
-.maze .mazeRow .mazeSpace span {
-  display: block;
-  width: 40px;
-  margin-top: 0;
-  color: #123;
-  top: 0; }
-
-.maze .mazeRow .mazeSpace span.robot {
-  color: #123; }
+    border-left-color: #292929;
+}
+.maze .mazeRow .mazeSpace i {
+    display: block;
+    position: absolute;
+    width: 2em;
+    color: #AAA;
+}
+.maze .mazeRow .mazeSpace i.robot {
+    color: #292929;
+}
 
 div.actions {
-  margin: 0;
-  padding: 3em;
-  list-style: none;
-  display: inline-block;
-  vertical-align: top; }
-
-div.actions span.robot {
+    margin: 0;
+    padding: 2em;
+    list-style: none;
+    display: inline-block;
+    vertical-align: top;
+}
+div.actions i.robot {
   display: block;
   text-align: center;
-  font-size: 1.5em;
-  margin-top: .5em; }
+  font-size: 3em;
+  margin-top: .5em;
+}
+
 
 div.actions .btn {
-  display: block;
-  margin-bottom: .5em; }
+    display: block;
+    margin-bottom: .5em;
+}
 
 .btn {
   display: inline-block;
@@ -131,14 +84,15 @@ div.actions .btn {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   border-bottom-color: #a2a2a2;
   -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   *zoom: 1;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); }
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
 
 .btn:hover,
 .btn:active,
@@ -147,7 +101,8 @@ div.actions .btn {
 .btn[disabled] {
   color: #333333;
   background-color: #e6e6e6;
-  *background-color: #d9d9d9; }
+  *background-color: #d9d9d9;
+}
 
 .btn:hover {
   color: #333333;
@@ -155,16 +110,19 @@ div.actions .btn {
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
   /* Buttons in IE7 don't get borders, so darken on hover */
+
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
-  -moz-transition: background-position 0.1s linear;
-  -o-transition: background-position 0.1s linear;
-  transition: background-position 0.1s linear; }
+     -moz-transition: background-position 0.1s linear;
+       -o-transition: background-position 0.1s linear;
+          transition: background-position 0.1s linear;
+}
 
 .btn:focus {
   outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px; }
+  outline-offset: -2px;
+}
 
 .btn.active,
 .btn:active {
@@ -173,5 +131,6 @@ div.actions .btn {
   background-image: none;
   outline: 0;
   -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); }
+     -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}

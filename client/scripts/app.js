@@ -56,7 +56,7 @@
 
 //someFunction.somePublicMethod();
 //returns: "somePublicMethod"
-var MODULE = (function ($) {
+var MODULE = (function($) {
   'use strict';
   var my = {},
     privateVariable = 1;
@@ -68,7 +68,7 @@ var MODULE = (function ($) {
   $('.welcome-message').html('You are , Enjoy.');
 
   my.moduleProperty = 1;
-  my.moduleMethod = function () {
+  my.moduleMethod = function() {
     // ...
   };
   return my;
@@ -77,8 +77,6 @@ var MODULE = (function ($) {
 
 
 
-var mainController = (function(){
+var mainController = (function() {
 
 });
-
-

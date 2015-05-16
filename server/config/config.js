@@ -51,6 +51,7 @@ module.exports = function(app, configEnv) {
 
 
   app.use(morgan('combined'));
+
   /*=======================================================
   =            Registering build-in middleware            =
   =======================================================*/
@@ -81,7 +82,6 @@ module.exports = function(app, configEnv) {
   }
 
   if ('development' === env || 'test' === env) {
-    app.use(require('connect-livereload')());
     app.use(express.static(path.join(configEnv.rootPath, '.tmp')));
     app.use(express.static(path.join(configEnv.rootPath, 'client')));
     app.use('/bower_components', express.static(path.join(configEnv.rootPath, '/bower_components')));

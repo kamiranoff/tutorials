@@ -7,7 +7,11 @@
 
 body {
   background-color: $siteBackground;
-  padding: 50px 15px;
+  padding: 50px 0px;
+}
+
+.main{
+  margin:30px;
 }
 
 h1 {
@@ -31,4 +35,9 @@ ul,li{
   margin: 0;
   text-indent: none;
   padding:0;
+}
+
+footer{
+  border-top: 1px solid $lightBorder;
+  margin-top: 20px;
 }
