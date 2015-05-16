@@ -12,7 +12,9 @@ var nodemon = require('gulp-nodemon');
 var livereload = require('gulp-livereload');
 
 
-/*==========  JADE  ==========*/
+/*============================
+=            JADE            =
+============================*/
 
 gulp.task('templates', function() {
   var YOUR_LOCALS = {};
@@ -29,10 +31,13 @@ gulp.task('jade:reload',function(){
   gulp.src('client/views/**/*.jade').pipe(livereload());
   });
 
-/*==========  END JADE  ==========*/
+/*-----  End of JADE  ------*/
 
 
-/*==========  SERVER  ==========*/
+
+/*==============================
+=            SERVER            =
+==============================*/
 
 gulp.task('serve', function() {
   nodemon({
@@ -49,9 +54,17 @@ gulp.task('serve', function() {
     });
 });
 
-/*==========  END SERVER  ==========*/
+/*-----  End of SERVER  ------*/
 
-/*==========  LINTING  ==========*/
+
+
+
+
+
+
+/*===============================
+=            LINTING            =
+===============================*/
 
 // Lint Task Front
 gulp.task('lintFront', function() {
@@ -69,11 +82,18 @@ gulp.task('lintBack', function() {
     .pipe(livereload());
 });
 
-/*========== END  LINTING  ==========*/
+/*-----  End of LINTING  ------*/
 
 
 
-// Compile Our Sass
+
+
+
+
+/*============================
+=            SASS            =
+============================*/
+
 gulp.task('sass', function() {
   return gulp.src('client/styles/**/*.scss')
     .pipe(sass())
@@ -81,11 +101,18 @@ gulp.task('sass', function() {
     .pipe(livereload());
 });
 
+/*-----  End of SASS  ------*/
 
 
-/*==========  Concatenate & Minify JS : NOT USES YET ==========*/
-// Concatenate & Minify JS
-//
+
+
+
+
+
+/*========================================
+=            CONCACT & MINIFY            =
+========================================*/
+
 gulp.task('scripts', function() {
   return gulp.src('client/scripts/**/*.js')
     .pipe(concat('all.js'))
@@ -96,8 +123,13 @@ gulp.task('scripts', function() {
 
 });
 
-/*==========  END Concatenate & Minify JS  ==========*/
+/*-----  End of CONCACT & MINIFY  ------*/
 
+
+
+/*==================================
+=            GULP TASKS            =
+==================================*/
 
 // Watch Files For Changes
 gulp.task('watch', function() {
@@ -111,3 +143,10 @@ gulp.task('watch', function() {
 
 // Default Task
 gulp.task('default', ['serve', 'lintFront', 'lintBack', 'sass', 'watch']);
+
+/*-----  End of GULP TASKS  ------*/
+
+
+
+
+

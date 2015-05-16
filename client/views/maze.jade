@@ -4,4 +4,12 @@ block content
   h1 This is the maze page
 
 block append scripts
+  script(src='scripts/maze/robot.js')
   script(src='scripts/maze/maze.js')
+  script(src='scripts/maze/mazespace.js')
+  script(type="text/javascript").
+    var m = new Maze(7, 5);
+    m.setStart(1, 1, "north");
+    m.setEnd(7, 1);
+    m.setWall(1, 1, "east");
+
