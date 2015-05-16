@@ -23,8 +23,8 @@ gulp.task('templates', function() {
     .pipe(jade({
       pretty: true
     }))
-    .pipe(gulp.dest('dist/html/'))
-    .pipe(livereload());
+    .pipe(gulp.dest('dist/html/'));
+
 });
 
 
@@ -99,16 +99,16 @@ gulp.task('browser-sync', ['serve'], function() {
 gulp.task('lintFront', function() {
   return gulp.src('client/**/*.js')
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(livereload());
+    .pipe(jshint.reporter('jshint-stylish'));
+
 });
 
 // Lint Task Back
 gulp.task('lintBack', function() {
   return gulp.src('server/**/*.js')
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(livereload());
+    .pipe(jshint.reporter('jshint-stylish'));
+
 });
 
 /*-----  End of LINTING  ------*/
@@ -126,8 +126,7 @@ gulp.task('lintBack', function() {
 gulp.task('sass', function() {
   return gulp.src('client/styles/**/*.scss')
     .pipe(sass())
-    .pipe(gulp.dest('client/styles'))
-    .pipe(livereload());
+    .pipe(gulp.dest('client/css'));
 });
 
 /*-----  End of SASS  ------*/
@@ -166,7 +165,7 @@ gulp.task('watch', function() {
   gulp.watch('client/**/*.js', ['lintFront', 'scripts']);
   gulp.watch('server/**/*.js', ['lintBack', 'scripts']);
   gulp.watch('client/styles/**/*.scss', ['sass']);
-  livereload.listen();
+
 });
 
 // Default Task
