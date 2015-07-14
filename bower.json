@@ -20,6 +20,7 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.4",
     "fontawesome": "~4.3.0",
-    "animate.css": "~3.2.6"
+    "animate.css": "~3.2.6",
+    "bootstrap-sass-official": "~3.3.5"
   }
 }

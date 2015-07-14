@@ -11,6 +11,17 @@ var rename = require('gulp-rename');
 var nodemon = require('gulp-nodemon');
 var livereload = require('gulp-livereload');
 var browserSync = require('browser-sync');
+var notify = require("gulp-notify") 
+
+
+var config = { 
+  sassPath: './resources/sass',
+  bootstrapDir: './bower_components/bootstrap-sass',
+  fontAwesomeDir: './bower_components/fontawesome',
+  publicDir: './client',
+   bowerDir: './bower_components' 
+}
+
 
 
 /*============================
@@ -35,7 +46,6 @@ gulp.task('templates', function() {
 /*-----  End of JADE  ------*/
 
 
-
 /*==============================
 =            SERVER            =
 ==============================*/
@@ -44,24 +54,24 @@ gulp.task('serve', function(cb) {
   // We use this `called` variable to make sure the callback is only executed once
   var called = false;
   return nodemon({
-    script: 'server/server.js',
-    watch: ['server/**/*.*','client/views/**/*.*']
-  })
-  .on('start', function onStart() {
-    if (!called) {
-      cb();
-    }
-    called = true;
-  })
-  .on('restart', function onRestart() {
+      script: 'server/server.js',
+      watch: ['server/**/*.*', 'client/views/**/*.*']
+    })
+    .on('start', function onStart() {
+      if (!called) {
+        cb();
+      }
+      called = true;
+    })
+    .on('restart', function onRestart() {
 
-    // Also reload the browsers after a slight delay
-    setTimeout(function reload() {
-      browserSync.reload({
-        stream: false
-      });
-    }, 500);
-  });
+      // Also reload the browsers after a slight delay
+      setTimeout(function reload() {
+        browserSync.reload({
+          stream: false
+        });
+      }, 500);
+    });
 });
 
 // Make sure `nodemon` is started before running `browser-sync`.
@@ -84,10 +94,6 @@ gulp.task('browser-sync', ['serve'], function() {
 });
 
 /*-----  End of SERVER  ------*/
-
-
-
-
 
 
 
@@ -115,7 +121,17 @@ gulp.task('lintBack', function() {
 
 
 
+/*===================================
+=            FontAwesome            =
+===================================*/
 
+gulp.task('icons', function() { 
+  return gulp.src(config.bowerDir + '/fontawesome/fonts/**.*') 
+    .pipe(gulp.dest('./client/fonts')); 
+});
+
+
+/*-----  End of FontAwesome  ------*/
 
 
 
@@ -123,18 +139,18 @@ gulp.task('lintBack', function() {
 =            SASS            =
 ============================*/
 
-gulp.task('sass', function() {
-  return gulp.src('client/styles/**/*.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('client/css'));
+gulp.task('sass', function() { 
+  return gulp.src(config.sassPath +'/**/*.scss')
+    .pipe(sass({
+      includePaths: [config.bootstrapDir + '/assets/stylesheets',config.fontAwesomeDir + '/scss'],
+    }))
+    .pipe(gulp.dest(config.publicDir + '/css'))
+    .on("error", notify.onError(function(error) { 
+      return "Error: " + error.message; 
+    }));
+
 });
-
 /*-----  End of SASS  ------*/
-
-
-
-
-
 
 
 /*========================================
@@ -164,11 +180,11 @@ gulp.task('watch', function() {
 
   gulp.watch('client/**/*.js', ['lintFront', 'scripts']);
   gulp.watch('server/**/*.js', ['lintBack', 'scripts']);
-  gulp.watch('client/styles/**/*.scss', ['sass']);
+  gulp.watch(config.sassPath + '/**/*.scss', ['sass']);
 
 });
 
 // Default Task
-gulp.task('default', ['browser-sync', 'lintFront', 'lintBack', 'watch']);
+gulp.task('default', ['browser-sync', 'lintFront', 'lintBack','icons', 'watch']);
 
 /*-----  End of GULP TASKS  ------*/

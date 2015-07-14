@@ -5,7 +5,8 @@
 .main-page-list{
   list-style: none;
   .main-page-links{
-    transition:0.3s all ease;
+    -webkit-transition:0.3s all ease;
+            transition:0.3s all ease;
     padding:30px 15px;
     display:block;
     border:1px solid $mediumBorder;
