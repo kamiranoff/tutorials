@@ -50,7 +50,11 @@ module.exports = function(app, configEnv) {
   app.use(bodyParser.json());
 
 
-  app.use(morgan('combined'));
+  app.use(morgan('combined', {
+    skip: function(req, res) {
+      return res.statusCode < 400;
+    }
+  }));
 
   /*=======================================================
   =            Registering build-in middleware            =
@@ -78,7 +82,7 @@ module.exports = function(app, configEnv) {
     app.use(favicon(path.join(configEnv.rootPath, 'public', 'favicon.ico')));
     app.use(express.static(path.join(configEnv.rootPath, 'public')));
     app.set('appPath', configEnv.rootPath + '/public');
-    app.use(morgan('dev'));
+    //app.use(morgan('dev'));
   }
 
   if ('development' === env || 'test' === env) {

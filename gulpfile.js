@@ -11,7 +11,8 @@ var rename = require('gulp-rename');
 var nodemon = require('gulp-nodemon');
 var livereload = require('gulp-livereload');
 var browserSync = require('browser-sync');
-var notify = require("gulp-notify") 
+var notify = require("gulp-notify") ;
+var plumber = require('gulp-plumber');
 
 
 var config = { 
@@ -100,10 +101,17 @@ gulp.task('browser-sync', ['serve'], function() {
 /*===============================
 =            LINTING            =
 ===============================*/
+var onError = function (err) {
+  gutil.beep();
+  console.log(err);
+};
 
 // Lint Task Front
 gulp.task('lintFront', function() {
   return gulp.src('client/**/*.js')
+    .pipe(plumber({
+      errorHandler: onError
+    }))
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 
@@ -112,6 +120,9 @@ gulp.task('lintFront', function() {
 // Lint Task Back
 gulp.task('lintBack', function() {
   return gulp.src('server/**/*.js')
+   .pipe(plumber({
+      errorHandler: onError
+    }))
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 
