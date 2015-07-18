@@ -1,7 +1,7 @@
 /**
  *
  * Watching Object Oriented Javascript (tutorials/javascript/vanilla/)
- * part 1 (17min)
+ * part 1 (26.28min)
  **/
 "use strict";
 
@@ -22,7 +22,7 @@
     for( x = 1; x <= width; x +=1 ){
       this.spaces[x] = [];
       for( y=1;y<= height; y+=1){
-        this.spaces[x][y] = "(" + x + "," + y + ")";
+        this.spaces[x][y] = new MazeSpace();
       }
     }
 }
@@ -37,4 +37,13 @@ Maze.prototype.setStart = function(x, y, orientation) {
 Maze.prototype.setEnd = function(x, y) {
     this.endX = x;
     this.endY = y;
+};
+
+
+Maze.prototype.setWall = function(x,y,direction) {
+  if(x > 0 && x <= this.width && y > 0 && y  <= this.height && ['north','east','south','west'].indexOf(direction) !== -1){
+    this.spaces[x][y].setWall(direction);
+    return true;
+  }
+  return false;
 };
