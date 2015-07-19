@@ -1,19 +1,24 @@
 .maze {
-    border: 5px solid $mazeMain;
-    display: inline-block;
-    vertical-align: top;
+  border: 5px solid $mazeMain;
+  display: inline-block;
+  vertical-align: top;
+  .mazeRow{
+    font-size: 1px;
+    .mazeSpace {
+      display: inline-block;
+      border: 2px solid $lightBorder;
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+      line-height: 20px;
+      font-size: 20px;
+      text-align: center;
+      position: relative;
+      padding:10px;
+    }
+  }
 }
-.maze .mazeRow .mazeSpace {
-    display: inline-block;
-    border: 2px solid $lightBorder;
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    line-height: 20px;
-    font-size: 20px;
-    text-align: center;
-    position: relative;
-}
+
 .maze .mazeRow .mazeSpace.north {
     border-top-color: $mazeMain;
 }
@@ -125,3 +130,29 @@ div.actions .btn {
   outline: 0;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
+
+
+.flaticon{
+  &:before{
+  margin-left: 0;
+  text-align: center;
+  display: block;
+  width: 100%;
+  font-size: 50px;
+  margin: 20px auto;
+  }
+  &.rotate180:before{
+    transform:rotate(180deg);
+  }
+  &.flip:before{
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+  }
+}
+
+
+

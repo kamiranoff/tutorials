@@ -13,6 +13,7 @@ var livereload = require('gulp-livereload');
 var browserSync = require('browser-sync');
 var notify = require("gulp-notify") ;
 var plumber = require('gulp-plumber');
+var gutil = require('gulp-util');
 
 
 var config = { 
@@ -20,7 +21,7 @@ var config = { 
   bootstrapDir: './bower_components/bootstrap-sass',
   fontAwesomeDir: './bower_components/fontawesome',
   publicDir: './client',
-   bowerDir: './bower_components' 
+ bowerDir: './bower_components' 
 }
 
 
@@ -32,6 +33,9 @@ var config = { 
 gulp.task('templates', function() {
 
   gulp.src('client/views/**/*.jade')
+    .pipe(plumber({
+      errorHandler: onError
+    }))
     .pipe(jade({
       pretty: true
     }))
@@ -101,7 +105,7 @@ gulp.task('browser-sync', ['serve'], function() {
 /*===============================
 =            LINTING            =
 ===============================*/
-var onError = function (err) {
+var onError = function(err) {
   gutil.beep();
   console.log(err);
 };
@@ -120,7 +124,7 @@ gulp.task('lintFront', function() {
 // Lint Task Back
 gulp.task('lintBack', function() {
   return gulp.src('server/**/*.js')
-   .pipe(plumber({
+    .pipe(plumber({
       errorHandler: onError
     }))
     .pipe(jshint())
@@ -151,9 +155,12 @@ gulp.task('icons', function() { 
 ============================*/
 
 gulp.task('sass', function() { 
-  return gulp.src(config.sassPath +'/**/*.scss')
+  return gulp.src(config.sassPath + '/**/*.scss')
+    .pipe(plumber({
+      errorHandler: onError
+    }))
     .pipe(sass({
-      includePaths: [config.bootstrapDir + '/assets/stylesheets',config.fontAwesomeDir + '/scss'],
+      includePaths: [config.bootstrapDir + '/assets/stylesheets', config.fontAwesomeDir + '/scss'],
     }))
     .pipe(gulp.dest(config.publicDir + '/css'))
     .on("error", notify.onError(function(error) { 
@@ -196,6 +203,6 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['browser-sync', 'lintFront', 'lintBack','icons', 'watch']);
+gulp.task('default', ['browser-sync', 'lintFront', 'lintBack', 'icons', 'watch']);
 
 /*-----  End of GULP TASKS  ------*/
