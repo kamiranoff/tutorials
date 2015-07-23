@@ -31,7 +31,7 @@ function Maze(width, height) {
 
 //Available in all our Maze instances
 Maze.prototype.setStart = function(x, y, orientation) {
-  if (this.isInBound(x, y) && this.isValidDirection(orientation)) {
+  if (this.isInBounds(x, y) && this.isValidDirection(orientation)) {
     this.startX = x;
     this.startY = y;
     this.startOrientation = orientation;
@@ -41,7 +41,7 @@ Maze.prototype.setStart = function(x, y, orientation) {
 };
 
 Maze.prototype.setEnd = function(x, y) {
-  if (!this.isInBound(x, y)) {
+  if (!this.isInBounds(x, y)) {
     return false;
   }
   this.endX = x;
@@ -51,7 +51,7 @@ Maze.prototype.setEnd = function(x, y) {
 
 
 Maze.prototype.setWall = function(x, y, direction)  {
-  if (this.isInBound(x, y) && this.isValidDirection(direction)) {
+  if (this.isInBounds(x, y) && this.isValidDirection(direction)) {
     this.spaces[x][y].setWall(direction);
     return true;
   }
@@ -64,6 +64,57 @@ Maze.prototype.isValidDirection = function(direction) {
 };
 
 //validation method
-Maze.prototype.isInBound = function(x, y) {
+Maze.prototype.isInBounds = function(x, y) {
   return (x > 0 && x <= this.width && y > 0 && y <= this.height);
+};
+
+Maze.prototype.canMove = function(x, y, direction) {
+  // body...
+  if (!this.isValidDirection(direction)) {
+    return false;
+  }
+  if (!this.isInBounds(x, y)) {
+    return false;
+  }
+  var forwardX, forwardY;
+  switch (direction) {
+    case "north":
+      forwardX = x;
+      forwardY = y + 1;
+      break;
+    case "east":
+      forwardX = x + 1;
+      forwardY = y;
+      break;
+    case "south":
+      forwardX = x;
+      forwardY = y - 1;
+      break;
+    case "west":
+      forwardX = x - 1;
+      forwardY = y;
+      break;
+  }
+  if (!this.isInBounds(forwardX, forwardY)) {
+    return false;
+  }
+
+  //Check if the space we are on as a wall
+  if (this.spaces[x][y][direction]) {
+    return false;
+  }
+
+  var opposites = {
+    north: "south",
+    east: "west",
+    south: "north",
+    west: "east"
+  };
+
+  //Check if the we are moving to has a wall on the opposite side
+  if (this.spaces[forwardX][forwardY][opposites[direction]]) {
+    return false;
+  }
+
+  return true;
 };

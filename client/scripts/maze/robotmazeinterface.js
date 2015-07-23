@@ -102,7 +102,7 @@ RobotMazeInterface.prototype.renderSpace = function (x,y) {
     eastRobotStart: "flip flaticon flaticon-left202",
     southRobotStart: "flaticon flaticon-down100",
     westRobotStart: "flaticon flaticon-left202",
-    robotEnd: "icon-ok-sign "
+    robotEnd: "flaticon flaticon-robots15"
   };
 
   var $space = $('<i>');
