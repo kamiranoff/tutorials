@@ -1,0 +1,16 @@
+extends index.jade
+
+block content
+  h1 This is the Xmen Game page.
+  .xmen-game
+    p
+      button.intelligenceTest
+        | intelligence Fight
+
+
+
+
+
+block append scripts
+   script(src='scripts/xmen-game/characters.js')
+   script(src='scripts/xmen-game/gameApp.js')

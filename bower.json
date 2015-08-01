@@ -21,6 +21,7 @@
     "bootstrap-sass": "~3.3.4",
     "fontawesome": "~4.3.0",
     "animate.css": "~3.2.6",
-    "bootstrap-sass-official": "~3.3.5"
+    "bootstrap-sass-official": "~3.3.5",
+    "pixi.js": "~3.0.7"
   }
 }

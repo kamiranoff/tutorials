@@ -2,7 +2,7 @@
  *
  * Server.js
  * Watching: TutsPlus Getting Started with Express
- * finished tuto
+ * watching Node.js Real Time Chat: Inserting Data (Part 4/7) on Youtube
  **/
 
 /*===============================
@@ -15,10 +15,15 @@ var express = require('express'),
   app = express();
 
 
+var mongo = require('mongodb').MongoClient,
+    io = require('socket.io')(8080).sockets;
+
+
+
 /*==========  Environment  ==========*/
 var environment = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
   env = require('./config/env')[environment];
-  console.log(env);
+console.log(env);
 
 /*==========  middlewares  ==========*/
 
@@ -42,6 +47,10 @@ require('./config/config')(app, env);
 
 
 
+
+
+
+
 /*===============================
 =            ROUTERS            =
 ===============================*/
@@ -59,6 +68,29 @@ require('./config/routers')(app);
 require('./routes/routes')(app);
 require('./routes/errors')(app);
 /*-----  End of ROUTES  ------*/
+
+/*==============================
+=            Socket            =
+==============================*/
+
+//require('./config/mongo.js');
+
+mongo.connect('mongodb://127.0.0.1/chat', function(err, db) {
+  if (err) {
+    throw err;
+  }
+  console.log('connected to db');
+  io.on('connection', function(socket) {
+    console.log('a user connected');
+    socket.on('input',function(data){
+      console.log(data);
+    })
+  });
+});
+
+
+/*-----  End of Socket  ------*/
+
 
 
 

@@ -1,0 +1,18 @@
+extends index.jade
+block append head
+  link(rel='stylesheet', href='css/html5-game/main-html5-game.css', type='stylesheet/css')
+
+block content
+  //- hack force load of font.
+  .font-load
+    | &nbsp;
+  h1 This is the HTML5 Game page.
+  div#game
+
+
+
+
+block append scripts
+  script(src='bower_components/pixi.js/bin/pixi.js')
+  script(src='scripts/html5-game/game-main.js')
+  script(src='scripts/html5-game/gameApp.js')

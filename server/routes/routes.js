@@ -4,7 +4,7 @@
 
 module.exports = function(app) {
   var path = require('path');
-  var client = global.appRoot = path.resolve(__dirname+ '/../../client/');
+  var client = global.appRoot = path.resolve(__dirname + '/../../client/');
 
 
   /*==========  Variables  ==========*/
@@ -52,7 +52,7 @@ module.exports = function(app) {
   /*==========  Formatting Requests  ==========*/
 
   app.get('/format', function(req, res) {
-    names = ['Wolverine', 'Psylocke','Jean Grey'];
+    names = ['Wolverine', 'Psylocke', 'Jean Grey'];
     res.format({
       'text/plain': function() {
         res.send('text response');
@@ -81,7 +81,7 @@ module.exports = function(app) {
     console.log('Route.js: from all method');
     console.log('Route: ' + __dirname);
     console.log('Route: ' + client);
-    console.log('Route: '+  global.appRoot);
+    console.log('Route: ' + global.appRoot);
     next();
   });
 
@@ -101,7 +101,7 @@ module.exports = function(app) {
 
   app.get('/', log, function(req, res) {
 
-    res.render(client+'/views/index', { //render jade files
+    res.render(client + '/views/index', { //render jade files
       names: names //Passing object of names
     });
   });
@@ -110,9 +110,18 @@ module.exports = function(app) {
     res.redirect('/'); //does a get request once the post is done
   });
 
-  app.get('/maze.html',function(req,res){
-    res.render(client+'/views/maze');
-  });
+
+  function renderPage(PageName) {
+    app.get('/' + PageName + '.html', function(req, res) {
+      res.render(client + '/views/' + PageName);
+    });
+  }
+
+  renderPage('maze');
+  renderPage('xmen-game');
+  renderPage('game');
+  renderPage('html5-game');
+
 
   /*==========  route with parameters  ==========*/
   //app.param has to be above the route that uses the parameters
