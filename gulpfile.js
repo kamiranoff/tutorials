@@ -177,6 +177,9 @@ gulp.task('sass', function() { 
 
 gulp.task('scripts', function() {
   return gulp.src('client/scripts/**/*.js')
+    .pipe(plumber({
+      errorHandler: onError
+    }))
     .pipe(concat('all.js'))
     .pipe(gulp.dest('dist/scripts'))
     .pipe(rename('all.min.js'))
