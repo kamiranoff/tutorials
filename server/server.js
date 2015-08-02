@@ -14,16 +14,29 @@
 var express = require('express'),
   app = express();
 
+/*============================
+=            LOGS            =
+============================*/
+var log4js = require('log4js');
+var logger = log4js.getLogger();
 
-var mongo = require('mongodb').MongoClient,
-    io = require('socket.io')(8080).sockets;
+logger.trace('logger.trace');
+logger.debug('logger.debug.');
+logger.info('logger.info');
+logger.warn('logger.warn');
+logger.error('logger.error');
+logger.fatal('logger.fatal');
+
+
+/*-----  End of LOGS  ------*/
+
 
 
 
 /*==========  Environment  ==========*/
 var environment = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
   env = require('./config/env')[environment];
-console.log(env);
+logger.info('Environment:', env);
 
 /*==========  middlewares  ==========*/
 
@@ -41,14 +54,7 @@ require('./config/config')(app, env);
 
 /*-----  End of configuration  ------*/
 
-
-
 /*-----  End of GLOBALS  ------*/
-
-
-
-
-
 
 
 /*===============================
@@ -69,29 +75,14 @@ require('./routes/routes')(app);
 require('./routes/errors')(app);
 /*-----  End of ROUTES  ------*/
 
-/*==============================
-=            Socket            =
-==============================*/
+/*============================
+=            CHAT            =
+============================*/
 
-//require('./config/mongo.js');
-
-mongo.connect('mongodb://127.0.0.1/chat', function(err, db) {
-  if (err) {
-    throw err;
-  }
-  console.log('connected to db');
-  io.on('connection', function(socket) {
-    console.log('a user connected');
-    socket.on('input',function(data){
-      console.log(data);
-    })
-  });
-});
+require('./chat/chatController.js')(env, logger);
 
 
-/*-----  End of Socket  ------*/
-
-
+/*-----  End of CHAT  ------*/
 
 
 /*==============================
@@ -100,7 +91,7 @@ mongo.connect('mongodb://127.0.0.1/chat', function(err, db) {
 //Binds and listens for connections on the specified host and port
 
 app.listen(env.port, function() {
-  console.log('listening on port ' + env.port + '...');
+  logger.info('listening on port ' + env.port + '...');
 });
 
 /*-----  End of Listen  ------*/

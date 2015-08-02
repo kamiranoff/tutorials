@@ -7912,7 +7912,8 @@ footer {
       background-color: #fefefe; }
 
 .chat {
-  max-width: 300px; }
+  margin: 20px auto 40px auto;
+  max-width: 900px; }
   .chat .chat-messages,
   .chat .chat-textarea,
   .chat .chat-name {
