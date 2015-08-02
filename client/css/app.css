@@ -7927,6 +7927,14 @@ footer {
     padding: 10px; }
     .chat .chat-messages .chat-message {
       margin-bottom: 10px; }
+  .chat .chat-messages-name {
+    font-weight: bold;
+    margin-right: 10px;
+    width: 60px;
+    display: inline-block; }
+    .chat .chat-messages-name:after {
+      content: ':';
+      margin-left: 1px; }
   .chat .chat-status {
     color: #efefef; }
 

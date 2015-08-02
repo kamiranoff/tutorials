@@ -1,8 +1,8 @@
 /**
  *
  * Server.js
- * Watching: TutsPlus Getting Started with Express
- * watching Node.js Real Time Chat: Inserting Data (Part 4/7) on Youtube
+ * Finished : Chat tuto
+ *
  **/
 
 /*===============================
@@ -29,9 +29,6 @@ logger.fatal('logger.fatal');
 
 
 /*-----  End of LOGS  ------*/
-
-
-
 
 /*==========  Environment  ==========*/
 var environment = process.env.NODE_ENV = process.env.NODE_ENV || 'development',

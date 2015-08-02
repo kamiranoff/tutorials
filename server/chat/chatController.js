@@ -1,9 +1,17 @@
+/**
+*
+* client side on client/scripts/chat/chat.js
+*
+**/
+
+
 var mongo = require('mongodb').MongoClient,
-  io = require('socket.io')(8080).sockets,
-  util = require('util'),
-  validator = require('validator');
+    io = require('socket.io')(8080).sockets,
+    util = require('util'),
+    validator = require('validator');
 
 module.exports = function(env, logger) {
+
 
   logger.info('Database', env.chatdb);
 
@@ -14,12 +22,22 @@ module.exports = function(env, logger) {
     io.on('connection', function(socket) {
       logger.info('connected to db chat');
 
-      var col = db.collection('messages'),
-        sendStatus = function(string) {
+      var messageCollection = db.collection('messages'),
+          sendStatus = function(string) {
           socket.emit('status', string);
-        };
+      };
 
-      //wait for input
+      /*==========  Emit all messages  ==========*/
+      messageCollection.find().limit(100).sort({ _id:1}).toArray(function(err,res){
+        if(err){
+          throw err;
+        }
+        socket.emit('output',res);
+      });
+
+
+      /*==========  Listening for inputs  ==========*/
+
       socket.on('userInput', function(data) {
         //stripLow(input [, keep_new_lines]) - remove characters with a numerical value < 32 and 127, mostly control characters.
         //If keep_new_lines is true, newline characters are preserved (\n and \r, hex 0xA and 0xD). Unicode-safe in JavaScript.
@@ -33,7 +51,7 @@ module.exports = function(env, logger) {
           logger.warn('white space only found. Not inserting that in the db. Sorry');
           sendStatus('A name and a message is required');
 
-        //insert message and send response to client
+
         }else if(!validator.isLength(name,1,50)){
           logger.warn('Name is too long. Not inserting that in the db. Sorry');
           sendStatus('Your name is either too short or too long');
@@ -42,15 +60,19 @@ module.exports = function(env, logger) {
           logger.warn('Message is too long. Not inserting that in the db. Sorry');
           sendStatus('Your message is either too short or too long');
 
+
+        //insert message to db and send response to client
         } else {
           //validation before saving into db;
           var messageObject = {
             name: name,
             message: message
           };
-
-          col.insert(messageObject, function() {
+         messageCollection.insert(messageObject, function() {
             logger.info('inserted: ' + message);
+
+            //Emit latest message to ALL clients
+            io.emit('output',[data]);
 
             sendStatus({
               message:'Message sent',
@@ -59,10 +81,6 @@ module.exports = function(env, logger) {
 
           });
         }
-
-
-
-
       });
     });
   });
