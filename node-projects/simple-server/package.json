@@ -1,0 +1,16 @@
+{
+  "name": "simple-server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Kevin Amiranoff",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kamiranoff/simple-server"
+  }
+}
