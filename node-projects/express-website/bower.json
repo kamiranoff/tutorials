@@ -1,0 +1,16 @@
+{
+  "name": "express-website",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kamiranoff/tutorials",
+  "authors": [
+    "Kevin Amiranoff <kamiranoff@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
