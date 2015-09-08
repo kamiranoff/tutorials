@@ -1,0 +1,26 @@
+{
+  "name": "react-express-list",
+  "version": "1.0.0",
+  "description": "list with react and express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.9.3",
+    "gulp": "^3.9.0",
+    "gulp-live-server": "0.0.27",
+    "gulp-nodemon": "^2.0.4"
+  }
+}

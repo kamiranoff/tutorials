@@ -1,0 +1,19 @@
+{
+  "name": "react-express-list",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kamiranoff/tutorials",
+  "authors": [
+    "Kevin Amiranoff <kamiranoff@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.13.3"
+  }
+}
