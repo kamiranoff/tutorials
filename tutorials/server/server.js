@@ -12,7 +12,7 @@
 // ./ points to the root folder
 
 var express = require('express'),
-  app = express();
+    app = express();
 
 /*============================
 =            LOGS            =

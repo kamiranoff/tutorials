@@ -42,7 +42,7 @@ module.exports = function(env, logger) {
 
       /*==========  Emit all messages  ==========*/
       messageCollection.find().limit(100).sort({
-        _id: 1
+        _id: -1
       }).toArray(function(err, res) {
         if (err) {
           throw err;

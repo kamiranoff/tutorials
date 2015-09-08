@@ -155,11 +155,11 @@ gulp.task('icons', function() { 
 ============================*/
 
 gulp.task('sass', function() { 
-  return gulp.src(config.sassPath + '/**/*.scss')
-    .pipe(plumber({
+ return gulp.src(config.sassPath + '/**/*.scss')
+  .pipe(plumber({
       errorHandler: onError
     }))
-    .pipe(sass({
+   .pipe(sass({
       includePaths: [config.bootstrapDir + '/assets/stylesheets', config.fontAwesomeDir + '/scss'],
     }))
     .pipe(gulp.dest(config.publicDir + '/css'))
